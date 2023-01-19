@@ -1,0 +1,3 @@
+class Employee (val name: String, val role: Role) {
+    var assignedTips = 0.0
+}
