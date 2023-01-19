@@ -1,0 +1,23 @@
+class SettlementManager {
+    private val employeeList = mutableListOf<Employee>()
+    private var totalTips = 0.0
+    
+    fun addEmployee(employee: Employee) {
+        employeeList.add(employee)
+    }
+    fun removeEmployee(employee: Employee) {
+        employeeList.remove(employee)
+    }
+    fun setTotalTips(total: Double) {
+        totalTips = total
+    }
+    fun calculateSettlement() {
+        for (employee in employeeList) {
+            val percentage = employee.role.tipPercentage
+            employee.assignedTips = (totalTips * percentage)
+        }
+    }
+    fun getEmployeeList(): List<Employee> {
+        return employeeList
+    }
+}
