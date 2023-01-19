@@ -1,0 +1,4 @@
+class Role (val name: String, val tipPercentage: Double)
+
+
+Esta clase representa un rol, con atributos de nombre y porcentaje de propina asignado a ese rol
