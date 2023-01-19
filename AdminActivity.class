@@ -1,0 +1,54 @@
+class AdminActivity : AppCompatActivity() {
+    private lateinit var spinnerRole: Spinner
+    private lateinit var editTextEmployeeName: EditText
+    private lateinit var buttonAdd: Button
+    private lateinit var buttonRemove: Button
+    private lateinit var recyclerViewEmployee: RecyclerView
+    private lateinit var adminManager: AdminManager
+    private lateinit var employeeAdapter: EmployeeAdapter
+    private lateinit var selectedRole: Role
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_admin)
+
+        spinnerRole = findViewById(R.id.spinnerRole)
+        editTextEmployeeName = findViewById(R.id.editTextEmployeeName)
+        buttonAdd = findViewById(R.id.buttonAdd)
+        buttonRemove = findViewById(R.id.buttonRemove)
+        recyclerViewEmployee = findViewById(R.id.recyclerViewEmployee)
+
+        adminManager = AdminManager()
+        employeeAdapter = EmployeeAdapter(adminManager.getEmployeeList())
+
+        recyclerViewEmployee.adapter = employeeAdapter
+
+        val roleArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, adminManager.getRoleList())
+        roleArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerRole.adapter = roleArrayAdapter
+        spinnerRole.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                selectedRole = parent.getItemAtPosition(position) as Role
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                //nothing
+            }
+        }
+
+        buttonAdd.setOnClickListener {val employeeName = editTextEmployeeName.text.toString()
+val employee = Employee(employeeName, selectedRole)
+adminManager.addEmployee(employee)
+employeeAdapter.notifyDataSetChanged()
+}
+buttonRemove.setOnClickListener {
+val employeeName = editTextEmployeeName.text.toString()
+val employee = Employee(employeeName, selectedRole)
+adminManager.removeEmployee(employee)
+employeeAdapter.notifyDataSetChanged()
+}
+}
+}
+
+Esta clase es la actividad para la sección de administración de la aplicación. Utiliza un Spinner para mostrar una lista de roles disponibles, un EditText para ingresar el nombre del empleado, y dos botones (Add y Remove) para agregar y eliminar empleados. También tiene un RecyclerView para mostrar la lista de empleados y un objeto de la clase AdminManager para manejar la lógica de la administración de empleados y roles
+
