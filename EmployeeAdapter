@@ -1,0 +1,25 @@
+class EmployeeAdapter(private val employeeList: List<Employee>) :
+    RecyclerView.Adapter<EmployeeAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.employee_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val employee = employeeList[position]
+        holder.textViewName.text = employee.name
+        holder.textViewRole.text = employee.role.name
+holder.textViewAssignedTips.text = "${employee.assignedTips} $"override fun getItemCount(): Int {
+    return employeeList.size
+}
+
+class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val textViewName: TextView = itemView.findViewById(R.id.textViewName)
+    val textViewRole: TextView = itemView.findViewById(R.id.textViewRole)
+    val textViewAssignedTips: TextView = itemView.findViewById(R.id.textViewAssignedTips)
+}
+
+}
+}
+
+Esta clase es un adaptador para RecyclerView que muestra la lista de empleados y su información (nombre, rol y propina asignada). Utiliza un layout personalizado para mostrar cada elemento de la lista y tiene métodos para manejar la creación y vinculación de elementos.
