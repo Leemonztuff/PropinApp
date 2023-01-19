@@ -1,3 +1,5 @@
 class Employee (val name: String, val role: Role) {
     var assignedTips = 0.0
 }
+
+Esta clase representa un empleado, con atributos de nombre y rol. También tiene un atributo "assignedTips" que almacena la propina asignada a ese empleado.
