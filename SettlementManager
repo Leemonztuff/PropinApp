@@ -21,3 +21,5 @@ class SettlementManager {
         return employeeList
     }
 }
+
+Esta clase se encarga de calcular y asignar la propina a cada empleado, con métodos para agregar, eliminar y recuperar empleados y un método para establecer el total de propina recaudada en el turno. Además tiene un método calculateSettlement() que itera a través de la lista de empleados y asigna la propina correspondiente a cada uno de ellos utilizando el porcentaje de propina asignado a su rol.
