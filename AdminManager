@@ -1,0 +1,23 @@
+class AdminManager {
+    private val employeeList = mutableListOf<Employee>()
+    private val roleList = mutableListOf<Role>()
+
+    fun addEmployee(employee: Employee) {
+        employeeList.add(employee)
+    }
+    fun removeEmployee(employee: Employee) {
+        employeeList.remove(employee)
+    }
+    fun addRole(role: Role) {
+        roleList.add(role)
+    }
+    fun removeRole(role: Role) {
+        roleList.remove(role)
+    }
+    fun getEmployeeList(): List<Employee> {
+        return employeeList
+    }
+    fun getRoleList(): List<Role> {
+        return roleList
+    }
+}
