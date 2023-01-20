@@ -1,0 +1,47 @@
+class SettlementActivity : AppCompatActivity() {
+    private lateinit var spinnerEmployee: Spinner
+    private lateinit var editTextTotalTips: EditText
+    private lateinit var buttonSettle: Button
+    private lateinit var recyclerViewEmployee: RecyclerView
+    private lateinit var settlementManager: SettlementManager
+    private lateinit var employeeAdapter: EmployeeAdapter
+    private lateinit var selectedEmployee: Employee
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+setContentView(R.layout.activity_settlement)spinnerEmployee = findViewById(R.id.spinnerEmployee)
+    editTextTotalTips = findViewById(R.id.editTextTotalTips)
+    buttonSettle = findViewById(R.id.buttonSettle)
+    recyclerViewEmployee = findViewById(R.id.recyclerViewEmployee)
+
+    settlementManager = SettlementManager()
+    employeeAdapter = EmployeeAdapter(settlementManager.getEmployeeList())
+
+    recyclerViewEmployee.adapter = employeeAdapter
+
+    val employeeArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, settlementManager.getEmployeeList())
+    employeeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    spinnerEmployee.adapter = employeeArrayAdapter
+    spinnerEmployee.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            selectedEmployee = parent.getItemAtPosition(position) as Employee
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>) {
+            //nothing
+        }
+    }
+
+    buttonSettle.setOnClickListener {
+        val totalTips = editTextTotalTips.text.toString().toDouble()
+        settlementManager.setTotalTips(totalTips)
+        settlementManager.calculateSettlement()
+        employeeAdapter.notifyDataSetChanged()
+    }
+}
+}
+
+
+Esta clase es la actividad para la sección de liquidación de propina de la aplicación. Utiliza un Spinner para mostrar una lista de empleados disponibles, un EditText para ingresar el total de propina recaudada en el turno, y un botón (Settle) para calcular y asignar la propina a cada empleado. También tiene un RecyclerView para mostrar la lista de empleados y un objeto de la clase SettlementManager para manejar la lógica de la liquidación de propina.
+
+Este es un ejemplo básico, pero espero que te sirva como una guía para comenzar a desarrollar tu aplicación. Te recomiendo que sigas investigando y aprendiendo sobre Kotlin y el desarrollo de aplicaciones para Android.
